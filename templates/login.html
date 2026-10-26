@@ -1,226 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In — {{ app_name }}</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap 5 & Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
-
-    <style>
-        .login-wrapper {
-            min-height: 100vh;
-            display: flex;
-            background-color: #0F172A;
-        }
-
-        .login-hero-col {
-            flex: 1.1;
-            background: radial-gradient(circle at 20% 20%, #1E293B 0%, #0F172A 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 3.5rem;
-            position: relative;
-            overflow: hidden;
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .login-form-col {
-            flex: 0.9;
-            background: #FFFFFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2.5rem;
-        }
-
-        .hero-graphic-box {
-            position: relative;
-            width: 100%;
-            height: 320px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .orbit-circle-1 {
-            position: absolute;
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            border: 1px dashed rgba(34, 211, 238, 0.3);
-            animation: rotateOrbit 25s linear infinite;
-        }
-
-        .orbit-circle-2 {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 1px solid rgba(13, 148, 136, 0.35);
-        }
-
-        .center-globe {
-            width: 110px;
-            height: 110px;
-            background: linear-gradient(135deg, #0D9488, #06B6D4);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #FFFFFF;
-            box-shadow: 0 0 40px rgba(6, 182, 212, 0.45);
-        }
-
-        @keyframes rotateOrbit {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .floating-badge {
-            position: absolute;
-            background: rgba(30, 41, 59, 0.85);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #FFFFFF;
-            padding: 0.6rem 1rem;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .badge-pos-1 { top: 20px; right: 40px; }
-        .badge-pos-2 { bottom: 30px; left: 30px; }
-
-        @media (max-width: 992px) {
-            .login-hero-col { display: none; }
-            .login-form-col { flex: 1; min-height: 100vh; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f6f1">
+  <meta name="description" content="Sign in to your secure TripSync workspace to manage bookings and keep every journey in sync.">
+  <title>Welcome back — {{ app_name }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
-<body>
-    <div class="login-wrapper">
-        <!-- Left Hero Presentation Column -->
-        <div class="login-hero-col">
-            <div class="d-flex align-items-center gap-3">
-                <div class="brand-icon-box">
-                    <i class="bi bi-compass"></i>
-                </div>
-                <div>
-                    <h3 class="text-white fw-bold mb-0">{{ app_name }}</h3>
-                    <span class="text-muted small">v{{ app_version }} • Travel Command Center</span>
-                </div>
-            </div>
-
-            <div class="hero-graphic-box">
-                <div class="orbit-circle-1"></div>
-                <div class="orbit-circle-2"></div>
-                <div class="center-globe pulse-glow">
-                    <i class="bi bi-airplane-engines"></i>
-                </div>
-
-                <div class="floating-badge badge-pos-1 floating-element">
-                    <span class="text-info"><i class="bi bi-shield-check fs-5"></i></span>
-                    <div>
-                        <div class="small text-muted">Role Security</div>
-                        <div>Admin & Staff RBAC</div>
-                    </div>
-                </div>
-
-                <div class="floating-badge badge-pos-2 floating-element" style="animation-delay: -2s;">
-                    <span class="text-success"><i class="bi bi-database-check fs-5"></i></span>
-                    <div>
-                        <div class="small text-muted">Cloud Persistence</div>
-                        <div>Firebase Firestore</div>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <h4 class="text-white fw-bold">Organize, Track & Analyze Travel Records</h4>
-                <p class="text-muted small mb-0" style="max-width: 440px;">
-                    Centralized reservation repository supporting flights, trains, buses, and hotels with payment tracking and print vouchers.
-                </p>
-            </div>
-        </div>
-
-        <!-- Right Form Column -->
-        <div class="login-form-col">
-            <div style="max-width: 420px; width: 100%;">
-                <div class="text-center mb-4">
-                    <div class="d-inline-flex p-3 rounded-circle bg-teal-subtle text-primary-teal mb-3">
-                        <i class="bi bi-lock-fill fs-2"></i>
-                    </div>
-                    <h2 class="fw-bold text-navy mb-1">Welcome Back</h2>
-                    <p class="text-muted small">Sign in to access the Travel Booking Data Organizer</p>
-                </div>
-
-                <!-- Error Alert -->
-                <div id="login-error" class="alert alert-danger d-none py-2 small" role="alert"></div>
-
-                {% include '_toast.html' %}
-
-                <form id="login-form" novalidate>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
-
-                    <div class="mb-3">
-                        <label for="email" class="form-label-custom">Email Address <span class="req">*</span></label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-envelope"></i></span>
-                            <input type="email" class="form-control form-control-custom border-start-0" id="email" name="email" placeholder="name@example.com" required autocomplete="username">
-                        </div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="password" class="form-label-custom">Password <span class="req">*</span></label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-key"></i></span>
-                            <input type="password" class="form-control form-control-custom border-start-0 border-end-0" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
-                            <button class="btn btn-outline-slate border-start-0" type="button" id="toggle-password" aria-label="Toggle password visibility">
-                                <i class="bi bi-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <button type="submit" id="login-btn" class="btn btn-primary-teal w-100 py-2 d-flex align-items-center justify-content-center gap-2">
-                        <span id="login-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                        <span>Sign In</span>
-                        <i class="bi bi-arrow-right"></i>
-                    </button>
-                </form>
-
-            </div>
-        </div>
+<body class="landing-page auth-page">
+  <a class="auth-skip" href="#auth-main">Skip to sign-in content</a>
+  <header class="site-header auth-site-header">
+    <div class="nav-shell auth-nav-shell">
+      <a class="brand" href="{{ url_for('index') }}" aria-label="TripSync public homepage">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11.5" stroke="currentColor" stroke-width="1.8"/><path d="m20.9 11.1-3 7-7 3 3-7 7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="16" cy="16" r="1.1" fill="currentColor"/></svg></span>
+        <span>trip<span class="brand-accent">sync</span><span class="brand-period">.</span></span>
+      </a>
+      <nav class="auth-nav-actions" aria-label="Sign-in navigation">
+        <a class="auth-nav-home" href="{{ url_for('index') }}"><i class="bi bi-arrow-left" aria-hidden="true"></i><span>Back to the website</span></a>
+        <a class="auth-nav-dashboard" href="{{ url_for('dashboard') }}">Return to Dashboard <span aria-hidden="true">↗</span></a>
+      </nav>
     </div>
+  </header>
 
-    <!-- Bootstrap 5 Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <main class="auth-layout" id="auth-main">
+    <section class="auth-visual" aria-label="Inspiring mountain landscape">
+      <div class="auth-photo" role="img" aria-label="Misty mountain peaks rising over a deep green valley"></div>
+      <div class="auth-photo-wash"></div>
+      <div class="auth-photo-orbit auth-photo-orbit-one" aria-hidden="true"></div>
+      <div class="auth-photo-orbit auth-photo-orbit-two" aria-hidden="true"></div>
+      <div class="auth-visual-content">
+        <div class="auth-eyebrow"><span class="auth-light-dot"></span> WELCOME TO A BETTER WAY TO TRAVEL</div>
+        <h1>Make every<br>journey <em>count.</em></h1>
+        <p>Your bookings, your plans, your peace of mind.<br>Beautifully organized, all in one place.</p>
+        <div class="auth-visual-meta"><span>01 / YOUR WORKSPACE</span><span>GO FURTHER. STAY IN SYNC. &nbsp; ↗</span></div>
+      </div>
+    </section>
 
-    <!-- Firebase Compat Web SDK (CDN) -->
+    <section class="auth-form-side" aria-labelledby="auth-heading">
+      <div class="auth-form-inner">
+        <div class="auth-mini-label"><span class="auth-mini-dot"></span> YOUR TRAVEL WORKSPACE <span class="auth-mini-number">02 / ACCESS</span></div>
+        {% if current_user %}
+          <div class="auth-welcome-message" aria-hidden="true"><i class="bi bi-check2-circle"></i></div>
+          <h2 class="auth-title" id="auth-heading">Already<br><em>in sync.</em></h2>
+          <p class="auth-intro">You're signed in as <strong>{{ current_user.get('name', current_user.get('email', 'your account')) }}</strong>. Your workspace is ready when you are.</p>
+          <a href="{{ url_for('dashboard') }}" class="auth-primary-action">Return to Dashboard <span aria-hidden="true">↗</span></a>
+          <a href="{{ url_for('index') }}" class="auth-back-link"><i class="bi bi-arrow-left" aria-hidden="true"></i> Explore the website</a>
+        {% else %}
+          <h2 class="auth-title" id="auth-heading">Welcome<br><em>back.</em></h2>
+          <p class="auth-intro">Your next chapter is waiting. Sign in to keep everything beautifully in sync.</p>
+
+          <div id="login-error" class="auth-alert d-none" role="alert" aria-live="polite"></div>
+          {% include '_toast.html' %}
+
+          <form id="login-form" class="auth-form" novalidate>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+            <div class="auth-field">
+              <label for="email">Email address <span aria-hidden="true">*</span></label>
+              <div class="auth-input-wrap">
+                <i class="bi bi-envelope" aria-hidden="true"></i>
+                <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="username" required aria-required="true">
+              </div>
+            </div>
+            <div class="auth-field">
+              <label for="password">Password <span aria-hidden="true">*</span></label>
+              <div class="auth-input-wrap auth-password-wrap">
+                <i class="bi bi-lock" aria-hidden="true"></i>
+                <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required aria-required="true">
+                <button class="auth-show-password" type="button" id="toggle-password" aria-label="Toggle password visibility" title="Show or hide password"><i class="bi bi-eye" aria-hidden="true"></i></button>
+              </div>
+            </div>
+            <button type="submit" class="auth-submit" id="login-btn">
+              <span class="auth-submit-label">Sign in to TripSync <span aria-hidden="true">↗</span></span>
+              <span id="login-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+            </button>
+          </form>
+          <div class="auth-quiet-note"><i class="bi bi-shield-check" aria-hidden="true"></i> Secure access for authorized Admin &amp; Staff</div>
+          <a href="{{ url_for('index') }}" class="auth-back-link"><i class="bi bi-arrow-left" aria-hidden="true"></i> Back to the website</a>
+        {% endif %}
+        <div class="auth-form-bottom"><span>TRIPSYNC · TRAVEL, SIMPLIFIED.</span><span>© {{ current_year }}</span></div>
+      </div>
+    </section>
+  </main>
+
+  {% if not current_user %}
     <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
-
-    <!-- Client Config & Auth Handler -->
     <script>
-        window.CSRF_TOKEN = "{{ csrf_token }}";
-        window.FIREBASE_CONFIG = {{ firebase_client_config | tojson | safe }};
+      window.CSRF_TOKEN = {{ csrf_token | tojson }};
+      window.FIREBASE_CONFIG = {{ firebase_client_config | tojson }};
     </script>
     <script src="{{ url_for('static', filename='js/firebase-auth.js') }}"></script>
+  {% endif %}
 </body>
 </html>

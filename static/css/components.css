@@ -627,3 +627,40 @@
     max-width: 400px;
     margin: 0 auto 1.25rem;
 }
+
+/* --------------------------------------------------------------------------
+   Header return navigation: public site from dashboard, dashboard from detail pages
+   -------------------------------------------------------------------------- */
+.nav-return-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.52rem 0.8rem;
+    border: 1px solid #DCE4E9;
+    border-radius: 0.65rem;
+    color: #143F4A;
+    background: #F7FAF9;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.nav-return-link i { font-size: 0.95rem; transition: transform 180ms ease; }
+.nav-return-link:hover,
+.nav-return-link:focus-visible {
+    color: #0F766E;
+    border-color: #74C9BD;
+    background: #EDF9F6;
+    text-decoration: none;
+}
+.nav-return-link:hover i { transform: translateX(-3px); }
+.nav-return-link:focus-visible { outline: 3px solid rgba(13, 148, 136, 0.25); outline-offset: 2px; }
+@media (max-width: 575.98px) {
+    .nav-return-link { padding: 0.5rem 0.6rem; font-size: 0.75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .nav-return-link, .nav-return-link i { transition: none; }
+}

@@ -1,4 +1,10 @@
-# 🧭 TripSync — Travel Booking Data Organizer (v1.0.0)
+> **Phase F v1.3.0 release candidate:** See [GitHub + Render Deployment Guide](docs/PHASE_F_DEPLOYMENT.md) for a secure production launch. Includes improved Gunicorn port binding, GitHub CI and the Firestore regression-test fix. A live Render deployment is not yet confirmed.
+
+> **v1.2 UI update:** The login screen now matches the editorial landing page, includes Back to the website / Return to Dashboard navigation, and displays a dashboard CTA for already authenticated users. See [`docs/LOGIN_DESIGN_UPDATE.md`](docs/LOGIN_DESIGN_UPDATE.md).
+
+> **v1.1 update:** TripSync now opens on a public, animated travel homepage at `/` with a **Log in** link in the top navigation. See [Landing Page Update](docs/LANDING_PAGE_UPDATE.md) for installation and changes.
+
+# 🧭 TripSync — Travel Booking Data Organizer (v1.3.0)
 > **Full-Stack College IT Workshop Mini Project**  
 > Built with **Python Flask**, **Firebase Cloud Firestore**, **Firebase Authentication**, **Bootstrap 5**, and **Chart.js**.
 
@@ -269,5 +275,3 @@ Developed as an academic mini project for the **College IT Workshop**. Designed 
 See [`docs/PHASES_A_D_CHANGELOG.md`](docs/PHASES_A_D_CHANGELOG.md) for the security and reliability changes, regression test results and browser QA limitations.
 
 **Release readiness:** Do not publish with real customer data until Firebase login/session verification and responsive browser behavior have been verified against the deployed application.
-#   T R I P S Y N C  
- 

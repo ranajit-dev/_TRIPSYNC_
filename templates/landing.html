@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f2">
+  <meta name="description" content="TripSync brings flight, train, bus and hotel records into one beautifully organized workspace. Secure travel booking management, payment tracking and insightful reports.">
+  <title>TripSync — Every journey, in one beautiful place</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+  <script defer src="{{ url_for('static', filename='js/landing.js') }}"></script>
+</head>
+<body class="landing-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="{{ url_for('index') }}" aria-label="TripSync home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11.5" stroke="currentColor" stroke-width="1.8"/><path d="m20.9 11.1-3 7-7 3 3-7 7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="16" cy="16" r="1.1" fill="currentColor"/></svg>
+        </span>
+        <span>trip<span class="brand-accent">sync</span><span class="brand-period">.</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a class="nav-link" href="#discover">Discover</a>
+        <a class="nav-link" href="#experience">Experience</a>
+        <a class="nav-link" href="#how-it-works">How it works</a>
+        <span class="nav-divider" aria-hidden="true"></span>
+        {% if current_user %}
+          <a class="nav-link nav-signin" href="{{ url_for('dashboard') }}">Dashboard</a>
+          <a class="nav-cta" href="{{ url_for('dashboard') }}">Open workspace <span aria-hidden="true">↗</span></a>
+        {% else %}
+          <a class="nav-link nav-signin" href="{{ url_for('login') }}">Log in</a>
+          <a class="nav-cta" href="{{ url_for('login') }}">Access your workspace <span aria-hidden="true">↗</span></a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-photo" role="img" aria-label="Layered mountains emerging from morning clouds"></div>
+      <div class="hero-wash"></div>
+      <div class="hero-orbit hero-orbit--one" aria-hidden="true"></div>
+      <div class="hero-orbit hero-orbit--two" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-eyebrow hero-enter"><span class="eyebrow-line"></span> A BETTER WAY TO GO PLACES <span class="eyebrow-line"></span></div>
+        <h1 id="hero-heading" class="hero-title hero-enter">Every journey<br>deserves a <em>story.</em></h1>
+        <p class="hero-subtitle hero-enter">Make room for more unforgettable moments.<br class="desktop-only"> We'll keep the details of every trip beautifully together.</p>
+        <div class="hero-actions hero-enter">
+          {% if current_user %}
+            <a href="{{ url_for('dashboard') }}" class="btn-light">Go to dashboard <span aria-hidden="true">↗</span></a>
+          {% else %}
+            <a href="{{ url_for('login') }}" class="btn-light">Get started <span aria-hidden="true">↗</span></a>
+          {% endif %}
+          <a href="#discover" class="hero-text-link">Explore TripSync <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <div class="hero-bottom">
+        <span>YOUR TRAVEL. BEAUTIFULLY IN SYNC.</span>
+        <a href="#discover" class="scroll-invite" aria-label="Scroll down to discover TripSync"><span>SCROLL TO EXPLORE</span><span class="scroll-mouse" aria-hidden="true"><span></span></span></a>
+        <span>01 / 04</span>
+      </div>
+    </section>
+
+    <section class="intro-block" id="discover" aria-labelledby="intro-heading">
+      <div class="section-kicker reveal"><span class="kicker-dot"></span> THE TRIPSYNC WAY <span class="kicker-index">01 / INTRODUCTION</span></div>
+      <div class="intro-grid">
+        <h2 id="intro-heading" class="editorial-heading reveal">Less organizing.<br><span>More <em>exploring.</em></span></h2>
+        <div class="intro-copy reveal">
+          <p>Plans change. Memories stay. TripSync brings the important parts of every journey together — so you can focus on what happens along the way.</p>
+          <a class="underlined-link" href="#experience">Discover the experience <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="editorial-grid" id="experience" aria-label="Explore the TripSync experience">
+      <article class="story-tile story-tile--photo reveal" data-tilt>
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=1450&amp;q=82" alt="Peaceful mountain lake reflecting clouds" loading="lazy" decoding="async">
+        <div class="tile-photo-caption"><span>01 — REMEMBER THE JOURNEY</span><span>↗</span></div>
+      </article>
+      <article class="story-tile story-tile--cream reveal">
+        <span class="tile-index">FLIGHTS · TRAINS · BUSES · HOTELS</span>
+        <div class="tile-body">
+          <span class="mini-symbol" aria-hidden="true">✳</span>
+          <h3>All your plans.<br><em>One place.</em></h3>
+          <p>From your first booking to the final destination, every reservation has a home.</p>
+          <a class="round-arrow" href="#how-it-works" aria-label="Learn how TripSync organizes bookings">↗</a>
+        </div>
+      </article>
+      <article class="story-tile story-tile--ink reveal">
+        <span class="tile-index">A LITTLE MORE CLARITY</span>
+        <div class="tile-body">
+          <span class="mini-symbol" aria-hidden="true">↗</span>
+          <h3>Beautifully<br><em>in control.</em></h3>
+          <p>Keep booking statuses, payment details and upcoming departures in view.</p>
+          <a class="round-arrow round-arrow--light" href="#how-it-works" aria-label="Discover the travel overview">↗</a>
+        </div>
+      </article>
+      <article class="story-tile story-tile--photo reveal" data-tilt>
+        <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&amp;fit=crop&amp;w=1450&amp;q=82" alt="Golden green hills stretching toward a misty horizon" loading="lazy" decoding="async">
+        <div class="tile-photo-caption"><span>02 — FIND YOUR WAY</span><span>↗</span></div>
+      </article>
+    </section>
+
+    <section class="marquee-band" aria-label="Travel made simple"><div class="marquee-track" aria-hidden="true">
+      <span>THE JOURNEY IS YOURS</span><span class="marquee-spark">✳</span><span>THE DETAILS ARE OURS</span><span class="marquee-spark">✳</span><span>THE JOURNEY IS YOURS</span><span class="marquee-spark">✳</span><span>THE DETAILS ARE OURS</span><span class="marquee-spark">✳</span>
+    </div></section>
+
+    <section class="feature-spread" id="how-it-works" aria-labelledby="feature-heading">
+      <div class="feature-photo reveal">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&amp;fit=crop&amp;w=1300&amp;q=82" alt="Sunlit green forest with a winding trail" loading="lazy" decoding="async">
+        <span class="photo-annotation">MADE FOR THE WAY YOU TRAVEL <span>↗</span></span>
+      </div>
+      <div class="feature-content reveal">
+        <div class="section-kicker"><span class="kicker-dot"></span> MADE FOR REAL LIFE <span class="kicker-index">02 / THE DETAILS</span></div>
+        <h2 id="feature-heading" class="editorial-heading">Every detail,<br><em>effortlessly.</em></h2>
+        <p class="feature-lead">An organized space for all the moving parts of travel — clear, dependable, and ready when you need it.</p>
+        <div class="feature-list">
+          <div class="feature-item"><span class="feature-number">01</span><div><h3>A single home for your bookings</h3><p>Flights, trains, buses and hotels together.</p></div><span class="feature-arrow" aria-hidden="true">↗</span></div>
+          <div class="feature-item"><span class="feature-number">02</span><div><h3>Stay a step ahead</h3><p>Keep an eye on departures and trip statuses.</p></div><span class="feature-arrow" aria-hidden="true">↗</span></div>
+          <div class="feature-item"><span class="feature-number">03</span><div><h3>Know where things stand</h3><p>Payment tracking, reporting and printable records.</p></div><span class="feature-arrow" aria-hidden="true">↗</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panorama" aria-labelledby="panorama-heading">
+      <div class="panorama-image" role="img" aria-label="Mountain peaks in evening light"></div>
+      <div class="panorama-shade"></div>
+      <div class="panorama-copy reveal">
+        <span class="panorama-label">IT'S TIME TO TRAVEL DIFFERENTLY</span>
+        <h2 id="panorama-heading">Make space for<br><em>the extraordinary.</em></h2>
+        <p>Your next great journey starts with a little more peace of mind.</p>
+        {% if current_user %}
+          <a class="btn-light" href="{{ url_for('dashboard') }}">Open your dashboard <span aria-hidden="true">↗</span></a>
+        {% else %}
+          <a class="btn-light" href="{{ url_for('login') }}">Log in to TripSync <span aria-hidden="true">↗</span></a>
+        {% endif %}
+      </div>
+      <div class="panorama-caption">COLLECT MOMENTS, NOT COMPLICATIONS.</div>
+    </section>
+  </main>
+  <footer class="landing-footer">
+    <a class="brand brand--footer" href="{{ url_for('index') }}" aria-label="TripSync home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11.5" stroke="currentColor" stroke-width="1.8"/><path d="m20.9 11.1-3 7-7 3 3-7 7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span>trip<span class="brand-accent">sync</span><span class="brand-period">.</span></span></a>
+    <p>Go further. Stay in sync.</p>
+    <div class="footer-links"><a href="#discover">Discover</a><a href="#how-it-works">How it works</a>{% if current_user %}<a href="{{ url_for('dashboard') }}">Dashboard</a>{% else %}<a href="{{ url_for('login') }}">Login</a>{% endif %}</div>
+    <div class="footer-bottom"><span>© {{ current_year }} TripSync. All journeys welcome.</span><span>Travel Booking Data Organizer</span></div>
+  </footer>
+</body>
+</html>

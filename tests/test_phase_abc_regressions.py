@@ -54,14 +54,22 @@ def test_flask_cookie_separate_from_firebase_cookie(app):
     assert app.config['SESSION_COOKIE_NAME'] != Config.FIREBASE_SESSION_COOKIE_NAME
 
 
-def test_inmemory_storage_fails_closed_outside_testing(app):
-    from database import _get_database_or_test_memory
-    assert _get_database_or_test_memory() is None  # within test fixture app context
+def test_inmemory_storage_fails_closed_outside_testing(app, monkeypatch):
+    import database
+
+    # In testing mode, the in-memory database is permitted.
+    assert database._get_database_or_test_memory() is None
+
+    # Simulate a real Firestore outage, even on developers' configured machines.
+    monkeypatch.setattr(database, "get_db", lambda: None)
+
     with app.app_context():
-        app.config['TESTING'] = False
-        with pytest.raises(RuntimeError, match='Firestore is unavailable'):
-            _get_database_or_test_memory()
-        app.config['TESTING'] = True
+        app.config["TESTING"] = False
+        try:
+            with pytest.raises(RuntimeError, match="Firestore is unavailable"):
+                database._get_database_or_test_memory()
+        finally:
+            app.config["TESTING"] = True
 
 
 def test_staff_cannot_cancel_using_edit(staff_client, sample_booking):

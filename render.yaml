@@ -1,14 +1,19 @@
+# TripSync deployment using Render Blueprint. Do not commit any secrets.
 services:
   - type: web
     name: travel-booking-organizer
     runtime: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
     plan: free
+    buildCommand: pip install -r requirements.txt
+    # Expose the dynamic Render PORT on every container/interface.
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 2 --timeout 120 app:app
+    healthCheckPath: /readyz
     autoDeployTrigger: commit
     envVars:
       - key: FLASK_ENV
         value: production
+      - key: FLASK_DEBUG
+        value: "0"
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: SECRET_KEY
@@ -27,5 +32,6 @@ services:
         sync: false
       - key: FIREBASE_APP_ID
         sync: false
-    # Add a private Secret File called serviceAccountKey.json in the Render
-    # service dashboard (Environment > Secret Files); do not commit it.
+# IMPORTANT: In Render > Environment > Secret Files create serviceAccountKey.json
+# using your existing private Firebase service account JSON. Render mounts it at
+# /etc/secrets/serviceAccountKey.json; do NOT add its contents to this YAML file.

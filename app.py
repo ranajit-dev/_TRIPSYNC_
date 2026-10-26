@@ -124,7 +124,8 @@ def create_app(config_name: str = None) -> Flask:
             "csrf_token": generate_csrf_token(),
             "app_name": "TripSync",
             "app_tagline": "Travel Booking Data Organizer",
-            "app_version": "1.0.0",
+            "app_version": "1.3.0",
+            "current_year": datetime.now().year,
             "categories": VALID_CATEGORIES,
             "category_labels": CATEGORY_LABELS,
             "category_icons": CATEGORY_ICONS,
@@ -162,16 +163,14 @@ def create_app(config_name: str = None) -> Flask:
 
     @app.route("/")
     def index():
-        """Root route: redirects to dashboard if authenticated, else login."""
-        if getattr(g, "current_user", None):
-            return redirect(url_for("dashboard"))
-        return redirect(url_for("login"))
+        """Public, editorial landing page; never exposes booking data."""
+        return render_template("landing.html")
 
     @app.route("/login")
     def login():
         """Renders the login page."""
-        if getattr(g, "current_user", None):
-            return redirect(url_for("dashboard"))
+        # Keep this page accessible to signed-in users so they can explicitly
+        # choose "Return to Dashboard" rather than see the sign-in form.
         return render_template("login.html")
 
     @app.route("/session/login", methods=["POST"])
@@ -538,7 +537,7 @@ def create_app(config_name: str = None) -> Flask:
         return jsonify({
             "status": "healthy",
             "service": "travel-booking-organizer",
-            "version": "1.0.0",
+            "version": "1.3.0",
             "firebase_ready": is_firebase_ready(),
         }), 200
 

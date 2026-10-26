@@ -42,3 +42,11 @@ htmlcov/
 *~
 .DS_Store
 Thumbs.db
+
+# Additional local secrets and runtime files
+.env.*
+!.env.example
+serviceAccount*.json
+*firebase-adminsdk*.json
+*.log
+instance/

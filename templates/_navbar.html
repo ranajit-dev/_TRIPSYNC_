@@ -20,8 +20,22 @@
         </div>
     </div>
 
-    <div class="d-flex align-items-center gap-3">
-        <a href="{{ url_for('add_booking') }}" class="btn btn-primary-teal btn-sm d-none d-sm-inline-flex align-items-center gap-2">
+    <div class="d-flex align-items-center gap-2 gap-md-3">
+        {# A direct navigation link, not browser history: works after a new login too. #}
+        {% if request.endpoint == 'dashboard' %}
+            <a href="{{ url_for('index') }}" class="nav-return-link" aria-label="Back to public website">
+                <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                <span class="d-none d-sm-inline">Back to Website</span>
+                <span class="d-sm-none">Website</span>
+            </a>
+        {% else %}
+            <a href="{{ url_for('dashboard') }}" class="nav-return-link" aria-label="Back to Dashboard">
+                <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                <span class="d-none d-sm-inline">Back to Dashboard</span>
+                <span class="d-sm-none">Dashboard</span>
+            </a>
+        {% endif %}
+        <a href="{{ url_for('add_booking') }}" class="btn btn-primary-teal btn-sm d-none d-lg-inline-flex align-items-center gap-2">
             <i class="bi bi-plus-lg"></i>
             <span>New Booking</span>
         </a>

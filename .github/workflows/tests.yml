@@ -1,0 +1,35 @@
+name: TRIPSYNC Tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FLASK_ENV: testing
+      FLASK_DEBUG: '0'
+      SECRET_KEY: test-only-ci-secret-not-used-for-production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Compile Python sources
+        run: python -m compileall -q app.py auth.py config.py database.py decorators.py firebase_config.py services.py scripts tests
+      - name: Run tests (isolated Firestore)
+        run: python -m pytest tests/ -q
+      - name: Ensure sensitive files are not tracked
+        run: |
+          if git ls-files | grep -E '(^|/)(\.env$|serviceAccountKey\.json$|credentials\.json$|venv/)'; then
+            echo 'Sensitive or unwanted files are tracked' >&2
+            exit 1
+          fi
